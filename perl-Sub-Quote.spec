@@ -4,13 +4,13 @@
 #
 Name     : perl-Sub-Quote
 Version  : 2.005001
-Release  : 7
+Release  : 8
 URL      : http://search.cpan.org/CPAN/authors/id/H/HA/HAARG/Sub-Quote-2.005001.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/H/HA/HAARG/Sub-Quote-2.005001.tar.gz
 Summary  : 'Efficient generation of subroutines via string eval'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Sub-Quote-doc
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::Fatal)
 BuildRequires : perl(Try::Tiny)
 
@@ -20,12 +20,13 @@ Sub::Quote - Efficient generation of subroutines via string eval
 SYNOPSIS
 package Silly;
 
-%package doc
-Summary: doc components for the perl-Sub-Quote package.
-Group: Documentation
+%package dev
+Summary: dev components for the perl-Sub-Quote package.
+Group: Development
+Provides: perl-Sub-Quote-devel = %{version}-%{release}
 
-%description doc
-doc components for the perl-Sub-Quote package.
+%description dev
+dev components for the perl-Sub-Quote package.
 
 
 %prep
@@ -54,9 +55,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,9 +66,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Sub/Defer.pm
-/usr/lib/perl5/site_perl/5.26.1/Sub/Quote.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Sub/Defer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Sub/Quote.pm
 
-%files doc
+%files dev
 %defattr(-,root,root,-)
-%doc /usr/share/man/man3/*
+/usr/share/man/man3/Sub::Defer.3
+/usr/share/man/man3/Sub::Quote.3
