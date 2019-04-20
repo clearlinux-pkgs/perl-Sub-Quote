@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Quote
 Version  : 2.006003
-Release  : 16
+Release  : 17
 URL      : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006003.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006003.tar.gz
 Summary  : efficient generation of subroutines via string eval
