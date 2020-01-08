@@ -4,13 +4,14 @@
 #
 Name     : perl-Sub-Quote
 Version  : 2.006006
-Release  : 19
+Release  : 20
 URL      : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006006.tar.gz
-Summary  : efficient generation of subroutines via string eval
+Summary  : 'Efficient generation of subroutines via string eval'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Sub-Quote-license = %{version}-%{release}
+Requires: perl-Sub-Quote-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::Fatal)
 BuildRequires : perl(Try::Tiny)
@@ -26,7 +27,6 @@ Summary: dev components for the perl-Sub-Quote package.
 Group: Development
 Provides: perl-Sub-Quote-devel = %{version}-%{release}
 Requires: perl-Sub-Quote = %{version}-%{release}
-Requires: perl-Sub-Quote = %{version}-%{release}
 
 %description dev
 dev components for the perl-Sub-Quote package.
@@ -40,8 +40,18 @@ Group: Default
 license components for the perl-Sub-Quote package.
 
 
+%package perl
+Summary: perl components for the perl-Sub-Quote package.
+Group: Default
+Requires: perl-Sub-Quote = %{version}-%{release}
+
+%description perl
+perl components for the perl-Sub-Quote package.
+
+
 %prep
 %setup -q -n Sub-Quote-2.006006
+cd %{_builddir}/Sub-Quote-2.006006
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -66,7 +76,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Sub-Quote
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Sub-Quote/LICENSE
+cp %{_builddir}/Sub-Quote-2.006006/LICENSE %{buildroot}/usr/share/package-licenses/perl-Sub-Quote/9ef6cb6bf8daa686a87a0d40ac8adcc38ff0a71c
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -79,8 +89,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Sub/Defer.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Sub/Quote.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,4 +97,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Sub-Quote/LICENSE
+/usr/share/package-licenses/perl-Sub-Quote/9ef6cb6bf8daa686a87a0d40ac8adcc38ff0a71c
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Sub/Defer.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Sub/Quote.pm
