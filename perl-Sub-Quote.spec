@@ -4,7 +4,7 @@
 #
 Name     : perl-Sub-Quote
 Version  : 2.006006
-Release  : 21
+Release  : 22
 URL      : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-2.006006.tar.gz
 Summary  : 'Efficient generation of subroutines via string eval'
@@ -101,5 +101,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/Sub/Defer.pm
-/usr/lib/perl5/vendor_perl/5.30.2/Sub/Quote.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Sub/Defer.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Sub/Quote.pm
